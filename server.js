@@ -9,7 +9,8 @@ app.get("/", function(req, res) {
         3:"Máquina 3",
         4:"Máquina 4",
         5:"Máquina 5",
-        6:"Máquina 6"
+        6:"Máquina 6",
+        6:"Máquina 7"
     });
 });
 
