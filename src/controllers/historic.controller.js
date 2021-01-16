@@ -13,5 +13,4 @@ exports.listAllHistoric = async (req, res) => {
         'rowCount':response.rowCount
     });
 
-    console.log(res);
   };
