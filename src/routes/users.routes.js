@@ -7,12 +7,12 @@
  */
 
 const router = require('express-promise-router')();
-const historicController = require('../controllers/historic.controller');
+const usersController = require('../controllers/users.controller');
 
 // ==> Definindo as rotas do CRUD - 'Product':
 
 // ==> Rota responsável por criar um novo 'Product': (POST): localhost:3000/api/products
-router.get('/historic', historicController.listAllHistoric);
+router.get('/users', usersController.listAllUsers);
 
 module.exports = router;
 

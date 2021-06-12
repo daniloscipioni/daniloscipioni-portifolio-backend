@@ -1,7 +1,7 @@
 const db = require("../config/database");
 
 // ==> Método responsável por listar todos os 'Products':
-exports.listAllHistoric = async (req, res) => {
+exports.listAllUsers = async (req, res) => {
    
     const response = await db.query('SELECT * FROM users.tbl_users');
 
