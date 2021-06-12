@@ -23,7 +23,7 @@ router.post('/login', (req, res, next) => {
     //     expiresIn: 300 // expires in 5min
     //   });
     //  return res.json({ auth: true, token: token });
-        return "Login ok"
+        res.status(200).json({message: 'Login autorizado!'});
 }
     
     res.status(500).json({message: 'Login inválido!'});
