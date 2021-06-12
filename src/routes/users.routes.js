@@ -18,7 +18,7 @@ router.post('/login', (req, res, next) => {
     //esse teste abaixo deve ser feito no seu banco de dados
     if(req.body.user === 'danilo' && req.body.password === 'danilo89'){
       //auth ok
-    //   const id = 1; //esse id viria do banco de dados
+       const id = 1; //esse id viria do banco de dados
        const token = jwt.sign({ id }, process.env.SECRET, {
          expiresIn: 300 // expires in 5min
        });
