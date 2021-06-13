@@ -14,13 +14,13 @@ const jwt = require('jsonwebtoken');
 // ==> Rota responsável por criar um novo 'Product': (POST): localhost:3000/api/products
 //router.get('/users', usersController.listAllUsers);
 
-router.get('/users', verifyJWT, usersController.listAllUsers)
+//router.get('/users', verifyJWT, usersController.listAllUsers)
 
-// router.get('/users', verifyJWT, (req, res, next) => { 
-//   console.log("Retornou todos clientes!");
-//   //res.json(usersController.listAllUsers);
-//   res.json([{id:1,nome:'luiz'}]);
-// })
+router.get('/users', verifyJWT, (req, res, next) => { 
+  console.log("Retornou todos clientes!");
+  //res.json(usersController.listAllUsers);
+  res.json([{id:1,nome:'luiz'}]);
+})
 
 
 router.post('/login', (req, res, next) => {
