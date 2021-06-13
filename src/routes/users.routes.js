@@ -38,16 +38,31 @@ router.post('/login', (req, res, next) => {
 })
 
 function verifyJWT(req, res, next){
-  const token = req.headers['authorization'];
-  if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
+  // const token = req.headers['x-access-token'];
+
+  // if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
   
-  jwt.verify(token, process.env.SECRET, function(err, decoded) {
-    if (err) return res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
+  // jwt.verify(token, process.env.SECRET, function(err, decoded) {
+  //   if (err) return res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
     
-    // se tudo estiver ok, salva no request para uso posterior
-    req.userId = decoded.id;
-    next();
-  });
+  //   // se tudo estiver ok, salva no request para uso posterior
+  //   req.userId = decoded.id;
+  //   next();
+  // });
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
+
+  if (token == null) return res.sendStatus(401)
+
+  jwt.verify(token, process.env.SECRET as string, (err: any, user: any) => {
+    console.log(err)
+
+    if (err) return res.sendStatus(403)
+
+    req.user = user
+
+    next()
+  })
 }
 
 module.exports = router;
