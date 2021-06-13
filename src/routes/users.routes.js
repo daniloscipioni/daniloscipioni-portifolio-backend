@@ -16,7 +16,8 @@ const jwt = require('jsonwebtoken');
 
 router.get('/users', verifyJWT, (req, res, next) => { 
   console.log("Retornou todos clientes!");
-  res.json(usersController.listAllUsers);
+  //res.json(usersController.listAllUsers);
+  res.json([{id:1,nome:'luiz'}]);
 })
 
 
