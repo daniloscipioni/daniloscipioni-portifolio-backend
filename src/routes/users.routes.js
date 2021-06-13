@@ -54,7 +54,7 @@ function verifyJWT(req, res, next){
 
   if (token == null) return res.sendStatus(401)
 
-  jwt.verify(token, process.env.SECRET as string, (err: any, user: any) => {
+  jwt.verify(token, process.env.SECRET, function(err, decoded) {
     console.log(err)
 
     if (err) return res.sendStatus(403)
