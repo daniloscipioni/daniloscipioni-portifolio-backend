@@ -29,7 +29,7 @@ function verifyJWT(req, res, next) {
     // eslint-disable-next-line no-console
     // console.log(err);
 
-    if (err) return res.status(403).json({ message: 'Token Expirado!' });
+    if (err) return res.status(403).json({ message: 'Token Expirado ou token inválido!' });
 
     req.userId = decoded.id;
     next();
