@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Arquivo: config/database.js
  * Descrição: arquivo responsável pelas 'connectionStrings da aplicação: PostgreSQL.
@@ -6,7 +7,7 @@
  */
 
 const { Pool } = require('pg');
-//const { Client } = require('pg');
+// const { Client } = require('pg');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -15,10 +16,9 @@ dotenv.config();
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 });
-
 
 pool.on('connect', () => {
   console.log('Base de Dados conectado com sucesso!');
