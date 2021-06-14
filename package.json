@@ -13,9 +13,12 @@
     "dotenv": "^8.2.0",
     "dotenv-safe": "^8.2.0",
     "express": "^4.17.1",
+    "express-openapi": "^9.0.3",
     "express-promise-router": "^4.0.1",
     "jsonwebtoken": "^8.5.1",
-    "pg": "^8.5.1"
+    "openapi-comment-parser": "^1.0.0",
+    "pg": "^8.5.1",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "eslint": "^7.28.0",

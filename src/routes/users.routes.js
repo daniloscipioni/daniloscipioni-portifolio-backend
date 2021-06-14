@@ -10,10 +10,13 @@ const router = require('express-promise-router')();
 const jwt = require('../config/jwt');
 const usersController = require('../controllers/users.controller');
 
-router.get('/users', jwt.verifyJWT, usersController.listAllUsers);
-
 /**
- * Função de login
+ * POST /api/login
+ * @summary Returns a list of users.
+ * @description Optional extended description in CommonMark or HTML.
+ * @response 200 - A JSON array of user names
+ * @bodyContent {CallbackForm} application/json
+ * @responseContent {string[]} 200.application/json
  */
 // eslint-disable-next-line consistent-return
 router.post('/login', async (req, res, next) => {
@@ -29,5 +32,15 @@ router.post('/login', async (req, res, next) => {
 
   res.status(500).json({ message: 'Login inválido!' });
 });
+
+/**
+ * GET /api/users
+ * @summary Returns a list of users.
+ * @description Optional extended description in CommonMark or HTML.
+ * @security bearerAuth
+ * @response 200 - A JSON array of user names
+ * @responseContent {string[]} 200.application/json
+ */
+router.get('/users', jwt.verifyJWT, usersController.listAllUsers);
 
 module.exports = router;
