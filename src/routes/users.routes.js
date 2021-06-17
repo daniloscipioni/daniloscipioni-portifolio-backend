@@ -12,11 +12,12 @@ const usersController = require('../controllers/users.controller');
 
 /**
  * POST /api/login
- * @summary Returns a list of users.
+ * @summary Returns a token.
  * @description Optional extended description in CommonMark or HTML.
- * @response 200 - A JSON array of user names
- * @bodyContent {CallbackForm} application/json
+ * @response 200 - A JSON array of authentication values
+ * @bodyContent {login} application/json
  * @responseContent {string[]} 200.application/json
+ * @schema users
  */
 // eslint-disable-next-line consistent-return
 router.post('/login', async (req, res, next) => {

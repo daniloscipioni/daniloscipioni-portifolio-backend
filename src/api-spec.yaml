@@ -2,3 +2,24 @@ openapi: 3.0.0
 info: 
   title: Api Portifólio Danilo Scipioni
   version: 1.0.0
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  # optional, for documentation purposes only
+  schemas:
+    login:
+      type: object
+      properties:
+      example:
+            user: daniloscipioni
+            password: danilo89
+    users:
+      type: object
+      properties:
+        id_user:
+          type: integer
+      
+    
+    
