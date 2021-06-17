@@ -7,7 +7,7 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT  # optional, for documentation purposes only
+      bearerFormat: JWT  # optional, for documentation purposes onlys
   schemas:
     login:
       type: object
