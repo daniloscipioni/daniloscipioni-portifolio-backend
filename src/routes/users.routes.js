@@ -28,10 +28,27 @@ router.post('/login', async (req, res, next) => {
   if (user.rowCount > 0) {
     const id = user.data[0].user_id;
     const validation = jwt.jwtSignin(id);
-    return res.json({ auth: true, token: validation.token, expiresIn: `${validation.expiresIn}sec` });
+    return res.json({
+      data: {
+        authentication: {
+          auth: true,
+          token: validation.token,
+          expiresIn: `${validation.expiresIn}sec`,
+        },
+        user,
+      },
+    });
   }
 
-  res.status(500).json({ message: 'Login inválido!' });
+  res.status(401).json({
+    data: {
+      authentication: {
+        auth: false,
+        message: 'Login incorreto',
+      },
+    },
+
+  });
 });
 
 /**

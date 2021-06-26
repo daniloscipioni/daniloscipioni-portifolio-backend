@@ -37,11 +37,8 @@ app.listen(port, () => {
 //   client.end();
 // });
 
-
-
 // app.get("/", function(req, res) {
 //     res.json({a:'b'});
 // });
-
 
 // http.createServer(app).listen(process.env.PORT || 3000, () => console.log("Servidor rodando local na porta 3000"));
