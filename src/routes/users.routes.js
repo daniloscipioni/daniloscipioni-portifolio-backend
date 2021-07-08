@@ -20,14 +20,12 @@ const usersController = require('../controllers/users.controller');
  * @schema users
  */
 // eslint-disable-next-line consistent-return
-router.post('/login', async (req, res, next) => {
+router.post('/login', async (req, res) => {
   const user = await usersController.searchUser(req.body);
-  // Tempo de vida util do token
-
-  // esse teste abaixo deve ser feito no seu banco de dados
   if (user.rowCount > 0) {
-    const id = user.data[0].user_id;
+    const id = user.data.user_id;
     const validation = jwt.jwtSignin(id);
+
     return res.json({
       data: {
         authentication: {
@@ -49,6 +47,38 @@ router.post('/login', async (req, res, next) => {
     },
 
   });
+});
+
+/**
+ * POST /api/register
+ * @sumary Register user
+ * @description Register user on database
+ * @response 200 - A JSON array with register information
+ * @bodyContent {register} application/json
+ * @responseContent {string[]} 200.application/json
+ * @schema users
+ */
+router.post('/register', async (req, res) => {
+  const register = await usersController.registerUser(req.body);
+
+  if (register.rowCount > 0) {
+    res.status(201).json({
+      data: {
+        success: true,
+        message: register.message,
+
+      },
+
+    });
+  } else {
+    res.status(406).json({
+      data: {
+        success: false,
+        message: `${register.message} -> ${register.data}`,
+      },
+
+    });
+  }
 });
 
 /**
