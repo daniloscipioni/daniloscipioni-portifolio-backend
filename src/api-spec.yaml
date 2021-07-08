@@ -20,6 +20,13 @@ components:
       properties:
         id_user:
           type: integer
+    register:
+      type: object
+      properties:
+      example:
+            user: daniloscipioni
+            password: danilo89
+            email: daniloedu@gmail.com
       
     
     
