@@ -19,15 +19,17 @@ exports.listAllUsers = async (req, res) => {
 // ==> Método responsável por buscar um usuário no banco de dados
 exports.searchUser = async (req, res) => {
   const response = await db.query(`SELECT created_at, email, last_access, password, user_id, username FROM users.tbl_users where username = '${req.user}'`);
-
+  if (response.rowCount > 0) {
   // Verifica se a hash do password do banco de dados combina com a senha passada
-  const passwordCheck = bcrypt.compareSync(req.password, response.rows[0].password); // true
-  // remove o campo password
-  delete response.rows[0].password;
+    const passwordCheck = bcrypt.compareSync(req.password, response.rows[0].password); // true
+    // remove o campo password
+    delete response.rows[0].password;
 
-  if (passwordCheck) {
-    return { data: response.rows, success: true, rowCount: response.rowCount };
+    if (passwordCheck) {
+      return { data: response.rows, success: true, rowCount: response.rowCount };
+    }
   }
+
   return { data: null, success: false, rowCount: 0 };
 };
 
@@ -39,7 +41,7 @@ exports.registerUser = async (req, res) => {
 
   try {
     // Grava o usuário no banco de dados
-    const response = await db.query(`INSERT INTO users.tbl_users(username, password, email, created_at, last_access)VALUES ('${req.user}', '${hash}', '${req.email}', now(), now());`);
+    const response = await db.query(`INSERT INTO users.tbl_users(username, password, email, created_at, last_access)VALUES ('${req.username}', '${hash}', '${req.email}', now(), now());`);
     return {
       data: response.rows, success: true, rowCount: response.rowCount, message: 'Usuário cadastrado com sucesso!',
     };

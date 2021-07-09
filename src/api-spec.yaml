@@ -24,7 +24,7 @@ components:
       type: object
       properties:
       example:
-            user: daniloscipioni
+            username: daniloscipioni
             password: danilo89
             email: daniloedu@gmail.com
       
