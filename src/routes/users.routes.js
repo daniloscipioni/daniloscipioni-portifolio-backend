@@ -1,9 +1,9 @@
 // @ts-nocheck
 /**
- * Arquivo: src/routes/machine.routes.js
- * Descrição: arquivo responsável pelas rotas da api relacionado a classe 'Machine'.
- * Data: 04/03/2020
- * Author Glaucia Lemos
+ * Arquivo: src/routes/users.routes.js
+ * Descrição: arquivo responsável pelas rotas da api relacionado a classe 'users'.
+ * Data: 10/07/2021
+ * Author Danilo Scipioni
  */
 
 const router = require('express-promise-router')();
