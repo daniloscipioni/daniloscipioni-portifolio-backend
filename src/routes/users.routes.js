@@ -14,8 +14,9 @@ const usersController = require('../controllers/users.controller');
  * POST /api/login
  * @summary Returns a token.
  * @description Optional extended description in CommonMark or HTML.
+ * @tag Users
  * @response 200 - A JSON array of authentication values
- * @bodyContent {login} application/json
+ * @bodyContent {Login} application/json
  * @responseContent {string[]} 200.application/json
  * @schema users
  */
@@ -53,8 +54,9 @@ router.post('/login', async (req, res) => {
  * POST /api/register
  * @sumary Register user
  * @description Register user on database
+ * @tag Users
  * @response 200 - A JSON array with register information
- * @bodyContent {register} application/json
+ * @bodyContent {Register} application/json
  * @responseContent {string[]} 200.application/json
  * @schema users
  */
@@ -85,6 +87,7 @@ router.post('/register', async (req, res) => {
  * GET /api/users
  * @summary Returns a list of users.
  * @description Optional extended description in CommonMark or HTML.
+ * @tag Users
  * @security bearerAuth
  * @response 200 - A JSON array of user names
  * @responseContent {string[]} 200.application/json
