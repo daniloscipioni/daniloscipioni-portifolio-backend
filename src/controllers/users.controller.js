@@ -5,7 +5,7 @@ const db = require('../config/database');
 const saltRounds = 5;
 // ==> Método responsável por listar todos os 'Usuários':
 exports.listAllUsers = async (req, res) => {
-  const response = await db.query('SELECT created_at, email, last_access, user_id, username FROM users.tbl_users');
+  const response = await db.query('SELECT nm_user, created_at, email, last_access, user_id, username FROM users.tbl_users');
   // teste = response.rows;
   res.status(200).json(
     {
@@ -18,7 +18,7 @@ exports.listAllUsers = async (req, res) => {
 
 // ==> Método responsável por buscar um usuário no banco de dados
 exports.searchUser = async (req, res) => {
-  const response = await db.query(`SELECT created_at, email, last_access, password, user_id, username FROM users.tbl_users where username = '${req.user}'`);
+  const response = await db.query(`SELECT nm_user, created_at, email, last_access, password, user_id, username FROM users.tbl_users where username = '${req.user}'`);
   if (response.rowCount > 0) {
   // Verifica se a hash do password do banco de dados combina com a senha passada
     const passwordCheck = bcrypt.compareSync(req.password, response.rows[0].password); // true
@@ -41,7 +41,7 @@ exports.registerUser = async (req, res) => {
 
   try {
     // Grava o usuário no banco de dados
-    const response = await db.query(`INSERT INTO users.tbl_users(username, password, email, created_at, last_access)VALUES ('${req.username}', '${hash}', '${req.email}', now(), now());`);
+    const response = await db.query(`INSERT INTO users.tbl_users(nm_user, username, password, email, created_at, last_access)VALUES ('${req.nmuser}','${req.username}', '${hash}', '${req.email}', now(), now());`);
     return {
       data: response.rows, success: true, rowCount: response.rowCount, message: 'Usuário cadastrado com sucesso!',
     };
