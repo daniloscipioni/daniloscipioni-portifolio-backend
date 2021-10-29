@@ -9,17 +9,46 @@ components:
       scheme: bearer
       bearerFormat: JWT  # optional, for documentation purposes onlys
   schemas:
-    login:
+    Login:
       type: object
       properties:
+        user:
+          type: string
+        password:
+          type: string
       example:
             user: daniloscipioni
             password: danilo89
-    users:
+    Users:
       type: object
       properties:
         id_user:
           type: integer
-      
+    Register:
+      type: object
+      properties:
+      example:
+            username: daniloscipioni
+            password: danilo89
+            email: daniloedu@gmail.com
+    Rss:
+      type: object
+      properties:
+        title:
+          type: string
+        content: 
+          type: string
+        link: 
+          type: string
+        date: 
+          type: date
+        categories: 
+          type: array
+      example:
+            title": A New System Is Helping Crack Down on Child Sex Abuse Images
+            content": There are 150 child sexual abuse laws around the world. Now, metadata is making it easier for countries to work together.
+            link": https://www.wired.com/story/new-system-crack-down-child-sex-abuse-images
+            date": 10/07/2021 10:00:00
+            categories": ["Security","Security / Security News"] 
     
     
