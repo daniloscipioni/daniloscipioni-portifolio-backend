@@ -52,3 +52,22 @@ exports.registerUser = async (req, res) => {
     };
   }
 };
+
+// ==> Método que atualiza a data do último acesso do usuário
+exports.updateLastAccessUser = async (idUser) => {
+
+  try {
+    // Grava o usuário no banco de dados
+   // const response = await db.query(`INSERT INTO users.tbl_users(nm_user, username, password, email, created_at, last_access)VALUES ('${req.nmuser}','${req.username}', '${hash}', '${req.email}', now(), now());`);
+    
+    const response = await db.query(`UPDATE users.tbl_users set last_access = now() where user_id = ${idUser};`);
+    return {
+      data: response.rows, success: true, rowCount: 1, message: 'Atualizado último acesso do usuário!',
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      data: error.detail, success: false, rowCount: 0, message: 'Não foi possível alterar o último acesso!',
+    };
+  }
+};

@@ -94,4 +94,38 @@ router.post('/register', async (req, res) => {
  */
 router.get('/users', jwt.verifyJWT, usersController.listAllUsers);
 
+/**
+ * PUT /api/update/last-access
+ * @summary Update user last access.
+ * @description Optional extended description in CommonMark or HTML.
+ * @tag Users
+ * @security bearerAuth
+ * @response 200 - A JSON array of user names
+ * @queryParam {integer} [selectedUser] - id user
+ * @responseContent {string[]} 200.application/json
+ * @schema users
+ */
+router.put('/update/last-access', async (req, res) => {
+  const update = await usersController.updateLastAccessUser(req.query.selectedUser);
+
+  if (update.rowCount > 0) {
+    res.status(201).json({
+      data: {
+        success: true,
+        message: update.message,
+
+      },
+
+    });
+  } else {
+    res.status(406).json({
+      data: {
+        success: false,
+        message: `${update.message} -> ${update.data}`,
+      },
+
+    });
+  }
+});
+
 module.exports = router;

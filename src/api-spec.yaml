@@ -31,6 +31,12 @@ components:
             username: daniloscipioni
             password: danilo89
             email: daniloedu@gmail.com
+    Update:
+      type: integer
+      properties:
+         category:
+          type: integer
+          example: 1
     Rss:
       type: object
       properties:
