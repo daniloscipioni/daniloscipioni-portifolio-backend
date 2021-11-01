@@ -87,7 +87,7 @@ router.post('/register', async (req, res) => {
  * @tag Users
  * @security bearerAuth
  * @response 200 - A JSON array of user names
- * @responseContent {string[]} 200.application/json
+ * @responseContent {string[]} 200.application/json 
  */
 router.get('/users', jwt.verifyJWT, usersController.listAllUsers);
 
@@ -103,7 +103,7 @@ router.get('/users', jwt.verifyJWT, usersController.listAllUsers);
  */
 router.put('/update/last-access', jwt.verifyJWT, async (req, res) => {
   const update = await usersController.updateLastAccessUser(req.query.idUser);
-
+// teste
   if (update.rowCount > 0) {
     res.status(201).json({
       data: {
