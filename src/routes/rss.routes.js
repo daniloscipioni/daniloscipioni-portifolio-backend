@@ -15,7 +15,6 @@ const rssController = require('../controllers/rss.controller');
  * @description News via rss
  * @response 200 - A JSON array of rss values
  * @tag Rss
- * @bodyContent {Rss} application/json
  * @responseContent {string[]} 200.application/json
  */
 router.get('/rss', async (req, res) => {

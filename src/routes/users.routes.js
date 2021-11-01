@@ -18,7 +18,6 @@ const usersController = require('../controllers/users.controller');
  * @response 200 - A JSON array of authentication values
  * @bodyContent {Login} application/json
  * @responseContent {string[]} 200.application/json
- * @schema users
  */
 // eslint-disable-next-line consistent-return
 router.post('/login', async (req, res) => {
@@ -52,13 +51,11 @@ router.post('/login', async (req, res) => {
 
 /**
  * POST /api/register
- * @sumary Register user
  * @description Register user on database
  * @tag Users
  * @response 200 - A JSON array with register information
  * @bodyContent {Register} application/json
  * @responseContent {string[]} 200.application/json
- * @schema users
  */
 router.post('/register', async (req, res) => {
   const register = await usersController.registerUser(req.body);
@@ -101,12 +98,11 @@ router.get('/users', jwt.verifyJWT, usersController.listAllUsers);
  * @tag Users
  * @security bearerAuth
  * @response 200 - A JSON array of user names
- * @queryParam {integer} [selectedUser] - id user
+ * @queryParam {integer} [idUser] - id user
  * @responseContent {string[]} 200.application/json
- * @schema users
  */
-router.put('/update/last-access', async (req, res) => {
-  const update = await usersController.updateLastAccessUser(req.query.selectedUser);
+router.put('/update/last-access', jwt.verifyJWT, async (req, res) => {
+  const update = await usersController.updateLastAccessUser(req.query.idUser);
 
   if (update.rowCount > 0) {
     res.status(201).json({
