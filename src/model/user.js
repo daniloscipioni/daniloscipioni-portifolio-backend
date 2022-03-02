@@ -1,6 +1,6 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 
-//const sequelize = new Sequelize('postgres::memory:');
+// const sequelize = new Sequelize('postgres::memory:');
 const sequelize = require('../config/database-sequelize');
 
 const User = sequelize.define('User', {
@@ -18,10 +18,12 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING(100),
   },
   created_at: {
-    type: DataTypes.DATEONLY,
+    type: DataTypes.DATE,
+    defaultValue: Date.now(),
   },
   last_access: {
-    type: DataTypes.DATEONLY,
+    type: DataTypes.DATE,
+    defaultValue: Date.now(),
   },
   username: {
     type: DataTypes.STRING(50),
