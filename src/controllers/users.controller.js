@@ -7,7 +7,7 @@ const saltRounds = 5;
 // ==> Método responsável por listar todos os 'Usuários':
 exports.listAllUsers = async (req, res) => {
   const users = await User.findAll({
-    attributes: ['nm_user', 'created_at', 'email', 'last_access', 'user_id', 'username']
+    attributes: ['nm_user', 'created_at', 'email', 'last_access', 'user_id', 'username'],
   });
 
   res.status(200).json(
@@ -21,10 +21,9 @@ exports.listAllUsers = async (req, res) => {
 
 // ==> Método responsável por buscar um usuário no banco de dados
 exports.searchUser = async (req, res) => {
-
   const user = await User.findAll({
     attributes: ['nm_user', 'created_at', 'email', 'last_access', 'password', 'user_id', 'username'],
-    where: { username: req.user }
+    where: { username: req.user },
   });
 
   if (Object.keys(user).length > 0) {
@@ -49,10 +48,15 @@ exports.registerUser = async (req, res) => {
 
   try {
     // Grava o usuário no banco de dados
-    const response = await db.query(`INSERT INTO users.tbl_users(nm_user, username, password, email, created_at, last_access)VALUES ('${req.nmuser}','${req.username}', '${hash}', '${req.email}', now(), now());`);
- 
+    const newUser = await User.create({
+      nm_user: req.nmuser,
+      username: req.username,
+      password: hash,
+      email: req.email,
+    });
+
     return {
-      data: response.rows, success: true, rowCount: response.rowCount, message: 'Usuário cadastrado com sucesso!',
+      data: newUser.dataValues, success: true, rowCount: Object.keys(newUser.dataValues).length, message: 'Usuário cadastrado com sucesso!',
     };
   } catch (error) {
     console.log(error);
@@ -67,8 +71,14 @@ exports.updateLastAccessUser = async (idUser) => {
   try {
     // Atualiza o horário do último acesso do usuário
     const response = await db.query(`UPDATE users.tbl_users set last_access = now() where user_id = ${idUser};`);
+    const updatedUser = await User.update({ last_access: Date.now() }, {
+      where: {
+        user_id: idUser,
+      },
+    });
+
     return {
-      data: response.rows, success: true, rowCount: 1, message: 'Atualizado último acesso do usuário!',
+      data: updatedUser, success: true, rowCount: 1, message: 'Atualizado último acesso do usuário!',
     };
   } catch (error) {
     console.log(error);
