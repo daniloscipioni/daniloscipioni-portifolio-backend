@@ -2,6 +2,10 @@ openapi: 3.0.0
 info: 
   title: Api Portifólio Danilo Scipioni
   version: 1.0.1
+  contact: 
+    name: Danilo Eduardo Scipioni
+    email: daniloedu@gmail.com
+    url: https://github.com/daniloscipioni
 components:
   securitySchemes:
     bearerAuth:
